@@ -14,19 +14,28 @@ def generate_password(length = 8, upper = True, low = True, num = True, special_
     if special_char:
         caracter += string.punctuation
 
-    contrasena = []
+    password = []
 
-    while (len(contrasena) < length):
+    while (len(password) < length):
         caracteres=random.choice(caracter)    
-        contrasena.append(caracteres)
+        password.append(caracteres)
 
-    contrasena = "".join(contrasena)
-    return contrasena
+    password = "".join(password)
+    return password
 
 def run():
-
-    contrasena = generate_password()
-    print('Tu nueva contraseña es: '+ contrasena)
+    try:
+        pass_length = int(input("Password length: "))
+        pass_upper = bool(input("Uppercase? (default false): "))
+        pass_low = bool(input("Lowercase? (default false): "))
+        pass_num = bool(input("Numbers? (default false): "))
+        pass_special = bool(input("Special Character? (default false): "))
+        password = generate_password(pass_length, pass_upper, pass_low, pass_num, pass_special)
+        print('Your new password is: '+ password)
+    except ValueError as er:
+        print("Wrong data type: " + str(er))
+    except IndexError as er:
+        print("At least choose one option: " + str(er))
 
 if __name__ == "__main__":
     run()
